@@ -25,17 +25,16 @@ include '../../php/FindOrder.php';
         <?php
         if (isset($_POST["Reg"])) {
             $db = DB();
-            $sql = "SELECT * FROM \"顧客資料\" where \"顧客編號\" =" . $_POST["id"];
+            $sql = "SELECT * FROM user where user_id =" . $_POST["user_id"];
             $result = $db->query($sql);
             while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-                if (isset($row->顧客編號)) {
-                    $_SESSION["idNum"] = $row->顧客編號;
-                    $_SESSION["name"] = $row->顧客名稱;
-                    $_SESSION["bir"] = $row->生日;
-                    $_SESSION["cus_id"] = $row->身分證字號;
-                    $_SESSION["phone"] = $row->連絡電話;
-                    $_SESSION["email"] = $row->電子郵件;
-                    $_SESSION["gender"] = $row->性別;
+                if (isset($row->user_id)) {
+                    $_SESSION["user_id"] = $row->user_id;
+                    $_SESSION["user_name"] = $row->user_name;
+                    $_SESSION["signup_datetime"] = $row->signup_datetime;
+                    $_SESSION["signup_email"] = $row->signup_email;
+                    $_SESSION["login_pas"] = $row->login_pas;
+                    $_SESSION["privilege"] = $row->privilege;
                     header("Location:change2.php");
                 }
             }
@@ -131,7 +130,7 @@ include '../../php/FindOrder.php';
 
                     <div class="6u 12u$(small)"> <p>客戶編號：</p>
 
-                        <input type="number" name="id" id="big" value="" placeholder="Number" required>
+                        <input type="number" name="user_id" id="big" value="" placeholder="Number" required>
                         <script>
                             var url = location.href;
                             //之後去分割字串把分割後的字串放進陣列中
