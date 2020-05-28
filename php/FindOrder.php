@@ -160,12 +160,12 @@ function FindOrder($id, $name) {
 
 function FindUser ($acc , $password){
     $db = DB();
-    $sql = "SELECT * FROM \"員工\" WHERE \"帳號\"='".$acc."' and \"密碼\"='".$password."'";
+    $sql = "SELECT * FROM user WHERE signup_email='".$acc."' and login_pas='".$password."'";
     $result = $db->query($sql);
     $row = $result->fetch(PDO::FETCH_ASSOC);
     if($row>1){
-        $_SESSION["acc"] = $acc;
-        $_SESSION["password"] = $password;
+        $_SESSION["signup_email"] = $acc;
+        $_SESSION["login_pas"] = $password;
         
         
         header('Location: ../maneger/userIndex.php');
@@ -181,7 +181,7 @@ function FindUser ($acc , $password){
 }
 
 function logInSure(){
-    if($_SESSION["acc"] == ""){
+    if($_SESSION["signup_email"] == ""){
         // echo '<script>  swal({
         //     text: "未登入或登入逾時！  兩秒後跳轉至登入畫面!",
         //     icon: "error",

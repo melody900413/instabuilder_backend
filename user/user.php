@@ -128,12 +128,12 @@
 
 					<div class="6u 12u$(small)" style="margin-left: 20%"> 
 						<p>帳號：</p>
-						<input type="text" name="id" id="id" value="" placeholder="" required>
+						<input type="text" name="signup_email" id="id" value="" placeholder="" required>
 					</div>
 						<br/>
 					<div class="6u$ 12u$(small)"  style="margin-left: 20%"> 
 						<p>密碼：</p>											
-						<input type="password" name="password" id="password" value="" placeholder="" required>
+						<input type="password" name="login_pas" id="password" value="" placeholder="" required>
 					</div>  
 
 					<div class="12u$">

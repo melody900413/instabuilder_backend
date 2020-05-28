@@ -4,9 +4,9 @@
     $db = DB();
     $sql ="DELETE \n".
     "FROM\n".
-    "	\"員工\"\n".
+    "	user\n".
     "WHERE\n".
-    "	員工編號 =". $_SESSION["dele_id"];
+    "	user_id = '". $_SESSION["dele_user_id"] . "'";
 
     $db->query($sql);
     $_SESSION["dele_sure"] = true;

@@ -106,7 +106,7 @@ include '../../php/FindOrder.php';
                 <hr/>
                 <?php
                 $db = DB();
-                $sql = "SELECT * from 顧客資料 ORDER BY 顧客編號";
+                $sql = "SELECT * from instabuilder.user ORDER BY user_id";
                 $result = $db->query($sql);
 //        echo '<table  border="1">';
 //        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
@@ -125,13 +125,12 @@ include '../../php/FindOrder.php';
                         <!--必填-->
 
                         <tr>
-                            <th width='80px'>顧客編號</th>
-                            <th >顧客名稱</th>
-                            <th width='100px'>生日</th>
-                            <th>身分證字號</th>
-                            <th>連絡電話</th>
-                            <th>電子郵件</th>
-                            <th>性別</th>
+                            <th width='100px'>使用者編號</th>
+                            <th >姓名</th>
+                            <th width='100px'>新增時間</th>
+                            <th>E-mail</th>
+                            <th>密碼</th>
+                            <th width='70px'>權限</th>
                             <th>更新</th>
                             <th>刪除</th>
                         </tr>
@@ -142,15 +141,15 @@ include '../../php/FindOrder.php';
                         while ($row = $result->fetch(PDO::FETCH_OBJ)) {
                             //PDO::FETCH_OBJ 指定取出資料的型態
                             echo '<tr>';
-                            echo '<td>' . $row->顧客編號 . "</td>"
-                            . "<td>" . $row->顧客名稱 . "</td>"
-                            . "<td>" . $row->生日 . "</td>"
-                            . "<td>" . $row->身分證字號 . "</td>"
-                            . "<td>" . $row->連絡電話 . "</td>"
-                            . "<td>" . $row->電子郵件 . "</td>"
-                            . "<td>" . $row->性別 . "</td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=". $row->顧客編號."\"'>更新</button></td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=". $row->顧客編號."\"'>刪除</button></td>";
+                            echo '<td>' . $row->user_id . "</td>"
+                            . "<td>" . $row->user_name . "</td>"
+                            . "<td>" . $row->signup_datetime . "</td>"
+                            . "<td>" . $row->signup_email . "</td>"
+                            . "<td>" . $row->login_pas . "</td>"
+                            . "<td>" . $row->privilege . "</td>"
+                            
+                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=". $row->user_id."\"'>更新</button></td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=". $row->user_id."\"'>刪除</button></td>";
 
                             echo '</tr>';
                         }

@@ -2,7 +2,7 @@
 <?php
 session_start();
 include '../php/FindOrder.php';
-if ($_SESSION["acc"] == "") {
+if ($_SESSION["signup_email"] == "") {
     header('Location: maneger.php');
     $_SESSION["unLog"] = true;
 }
@@ -98,7 +98,7 @@ if ($_SESSION["acc"] == "") {
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>歡迎<?php echo $_SESSION["acc"]; ?></h2>
+                <h2>歡迎<?php echo $_SESSION["signup_email"]; ?></h2>
                 <h3><?php echo date('Y-M-D'); ?></h3>
 
 

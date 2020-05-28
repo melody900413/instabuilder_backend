@@ -7,7 +7,7 @@ include '../../php/FindOrder.php';
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
         <title>刪除客戶</title>
         <!-- 連結思源中文及css -->
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
@@ -39,13 +39,13 @@ include '../../php/FindOrder.php';
 
         $sure = true;
         if (isset($_POST["Reg"])) {
-            if (empty($_POST["id"])) {
+            if (empty($_POST["user_id"])) {
 
                 $nameErr = "姓名是必填的!";
                 $sure = false;
             }
             if ($sure) {
-                $_SESSION["dele_id"] = $_POST["id"];
+                $_SESSION["dele_user_id"] = $_POST["user_id"];
                 echo '        <script>
                 swal({
                     title: "確定刪除？",
@@ -164,7 +164,7 @@ include '../../php/FindOrder.php';
 
                     <div class="6u 12u$(small)"> <p>客戶編號：</p>
 
-                        <input type="text" name="id" id="big" value="" placeholder="Number" required>
+                        <input type="text" name="user_id" id="big" value=""  required>
                         <script>
                             var url = location.href;
                             //之後去分割字串把分割後的字串放進陣列中
