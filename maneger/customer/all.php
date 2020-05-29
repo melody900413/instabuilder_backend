@@ -60,11 +60,10 @@ include '../../php/FindOrder.php';
             <ul id="navigation" style="z-index: 2; background:#F1EEC2;">        
                 <li><a href="../userIndex.php" style="color:#000; ">主頁</a></li>            
 
-
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">客戶</a>          
+                    <a href="#" style="color:#000; ">帳戶管理</a>          
                     <ul style="z-index: 2; ">          
-                        <li><a href="../customer/all.php">客戶總覽</a></li>
+                        <li><a href="../customer/all.php">帳戶總覽</a></li>
                         <li><a href="../customer/add.php">新增</a></li>                 
                         <li><a href="../customer/delete.php">刪除</a></li>
                         <li><a href="../customer/change.php">更新</a></li>                       
@@ -72,9 +71,9 @@ include '../../php/FindOrder.php';
                 </li>              
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">員工</a>          
+                    <a href="#" style="color:#000; ">Hashtags</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../employee/all.php">員工總覽</a></li>
+                        <li><a href="../employee/all.php">Hashtags總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
                         <li><a href="../employee/change.php">更新</a></li>                   
@@ -82,15 +81,13 @@ include '../../php/FindOrder.php';
                 </li>     
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">訂單</a>          
+                    <a href="#" style="color:#000; ">貼文管理</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../order/all.php">訂單總覽</a></li>
+                        <li><a href="../order/all.php">貼文總覽</a></li>
                         <li><a href="../order/delete.php">刪除</a></li>
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
-                </li> 
-         
-
+                </li>   
             </ul>
         </div>
 
@@ -102,7 +99,7 @@ include '../../php/FindOrder.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>客戶總覽</h2>
+                <h2>帳戶總覽</h2>
                 <hr/>
                 <?php
                 $db = DB();
@@ -117,7 +114,7 @@ include '../../php/FindOrder.php';
 //        }
 //        echo '</table>';
                 ?>
-               <P> 搜尋客戶：</p><input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
+               <P> 搜尋帳戶：</p><input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
 
 
                 <table id="table-3" class="order-table"   >

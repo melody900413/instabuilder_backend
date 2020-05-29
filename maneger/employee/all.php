@@ -61,9 +61,9 @@ include '../../php/FindOrder.php';
                 <li><a href="../userIndex.php" style="color:#000; ">主頁</a></li>            
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">客戶</a>          
+                    <a href="#" style="color:#000; ">帳戶管理</a>          
                     <ul style="z-index: 2; ">          
-                        <li><a href="../customer/all.php">客戶總覽</a></li>
+                        <li><a href="../customer/all.php">帳戶總覽</a></li>
                         <li><a href="../customer/add.php">新增</a></li>                 
                         <li><a href="../customer/delete.php">刪除</a></li>
                         <li><a href="../customer/change.php">更新</a></li>                       
@@ -71,9 +71,9 @@ include '../../php/FindOrder.php';
                 </li>              
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">員工</a>          
+                    <a href="#" style="color:#000; ">Hashtags</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../employee/all.php">員工總覽</a></li>
+                        <li><a href="../employee/all.php">Hashtags總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
                         <li><a href="../employee/change.php">更新</a></li>                   
@@ -81,15 +81,13 @@ include '../../php/FindOrder.php';
                 </li>     
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">訂單</a>          
+                    <a href="#" style="color:#000; ">貼文管理</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../order/all.php">訂單總覽</a></li>
+                        <li><a href="../order/all.php">貼文總覽</a></li>
                         <li><a href="../order/delete.php">刪除</a></li>
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
                 </li>   
-         
-
             </ul>
         </div>
 
@@ -101,11 +99,11 @@ include '../../php/FindOrder.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>員工總覽</h2>
+                <h2>Hashtags總覽</h2>
                 <hr/>
                 <?php
                 $db = DB();
-                $sql = "SELECT * FROM \"員工\" ORDER BY \"員工編號\"";
+                $sql = "SELECT * FROM hashtagcates ORDER BY hashtag_no";
                 $result = $db->query($sql);
 //        echo '<table  border="1">';
 //        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
@@ -116,7 +114,7 @@ include '../../php/FindOrder.php';
 //        }
 //        echo '</table>';
                 ?>
-                <P> 搜尋員工：</p><input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
+                <P> 搜尋Hashtags：</p><input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
 
 
                 <table id="table-3" class="order-table"   >
@@ -124,12 +122,11 @@ include '../../php/FindOrder.php';
                         <!--必填-->
 
                         <tr>
-                            <th >員工編號</th>
-                            <th >員工姓名</th>
-                            <th >職稱</th>
-                            <th>帳號</th>
-                            <th>密碼</th>
-                            <th>更新</th>
+                            <th >hashtag編號</th>
+                            <th >hashtag</th>
+                            <th >階層</th>
+                            <th>上一層hashtag</th>
+                            <th >更新</th>
                             <th>刪除</th>
                         </tr>
                     </thead>
@@ -139,13 +136,13 @@ include '../../php/FindOrder.php';
                         while ($row = $result->fetch(PDO::FETCH_OBJ)) {
                             //PDO::FETCH_OBJ 指定取出資料的型態
                             echo '<tr>';
-                            echo '<td>' . $row->員工編號 . "</td>"
-                            . "<td>" . $row->員工姓名 . "</td>"
-                            . "<td>" . $row->職稱 . "</td>"
-                            . "<td>" . $row->帳號 . "</td>"
-                            . "<td>" . $row->密碼 . "</td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=" . $row->員工編號 . "\"'>更新</button></td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=" . $row->員工編號 . "\"'>刪除</button></td>";
+                            echo '<td>' . $row->hashtag_no . "</td>"
+                            . "<td>" . $row->hashtag . "</td>"
+                            . "<td>" . $row->stage . "</td>"
+                            . "<td>" . $row->last_stage . "</td>"
+                            
+                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=" . $row->hashtag_no . "\"'>更新</button></td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=" . $row->hashtag_no . "\"'>刪除</button></td>";
 
                             echo '</tr>';
                         }

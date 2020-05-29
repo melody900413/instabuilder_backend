@@ -26,75 +26,55 @@ include_once '../../php/DataBase.php';
 
     <body>
         <?php
-        $nameErr = $emailErr = $genderErr = $idErr = $birErr = $phoneErr = $DateErr = "";
-        $name = $id = $bir = $num = $phone = $email = "";
+        $user_nameErr = $signup_datetimeErr = $signup_emailErr = $login_pasErr = $privilegeErr = "";
+        $user_name = $signup_datetime = $signup_email = $login_pas = $privilege  = "";
         $sure = true;
 
         if (isset($_POST["Reg"])) {
-            $name = $_POST["name"];
-            $id = $_POST["id"];
-            $bir = $_POST["bir"];
-            $phone = $_POST["phone"];
-            $email = $_POST["email"];
+            $user_name = $_POST["user_name"];
+            $signup_datetime = $_POST["signup_datetime"];
+            $signup_email = $_POST["signup_email"];
+            $login_pas = $_POST["login_pas"];
+            $privilege = $_POST["privilege"];
 
-            if (empty($_POST["name"])) {
+            if (empty($_POST["user_name"])) {
 
                 $nameErr = "姓名是必填的!";
                 $sure = false;
             }
 
-            if (empty($_POST["id"])) {
-                $idErr = "身分證是必填的!";
+            if (empty($_POST["signup_datetime"])) {
+                $signup_datetimeErr = "日期是必填的!";
                 $sure = false;
-            } else {
-                $idtest = test_input($_POST["id"]);
-                if (!preg_match("/^[A-Z]{1}[0-9]{9}$/", $idtest)) {
-                    $idErr = "身分證不符合格式!";
-                    $sure = false;
-                }
+            } 
+
+            if (empty($_POST["signup_email"])) {
+                $signup_emailErr = "email是必填的!";
+                $sure = false;
+            } 
+
+            if (empty($_POST["login_pas"])) {
+                $login_pasErr = "login_pas是必填的!";
+                $sure = false;
             }
 
-            if (empty($_POST["bir"])) {
-                $birErr = "生日是必填的!";
-                $sure = false;
-            } else {
-//            $date = (strtotime($bir) - strtotime(date('Y-m-d'))) / (365*3+366);
-                $age = round((time() - strtotime($bir)) / (24 * 60 * 60) / 365.25, 0);
-
-                if ($age < 20) {
-                    $birErr = "低於20歲無法訂房!";
-                    $sure = false;
-                }
-            }
-
-            if (empty($_POST["phone"])) {
-                $phoneErr = "手機是必填的!";
-                $sure = false;
-            } else {
-                $phonetest = test_input($_POST["phone"]);
-                if (!preg_match("/^09[0-9]{8}$/", $phonetest)) {
-                    $phoneErr = "手機號碼不符合格式!";
-                    $sure = false;
-                }
-            }
-
-            if (empty($_POST["email"])) {
-                $emailErr = "E-mail是必填的!";
+            if (empty($_POST["privilege"])) {
+                $privilegeErr = "權限是必填的!";
                 $sure = false;
             }
             if ($sure) {
 
                 $db = DB();
-                $sql = "UPDATE \"顧客資料\" \n" .
-                        "SET \"顧客編號\" = ".$_SESSION["idNum"].",\n" .
-                        "\"顧客名稱\" = '".$_POST["name"]."',\n" .
-                        "\"生日\" = '".$_POST["bir"]."',\n" .
-                        "\"身分證字號\" = '".$_POST["id"]."',\n" .
-                        "\"連絡電話\" = '".$_POST["phone"]."',\n" .
-                        "\"電子郵件\" = '".$_POST["email"]."',\n" .
-                        "\"性別\" = '".$_POST["gender"]."' \n" .
-                        "WHERE\n" .
-                        "	\"顧客編號\" =" . $_SESSION["idNum"];
+
+                $sql = "UPDATE user \n" .
+                "SET user_id = ".$_SESSION['user_id'].",\n" .
+                "user_name = '".$_POST['user_name']."',\n" .
+                "signup_datetime = '".$_POST['signup_datetime']."',\n" .
+                "signup_email = '".$_POST['signup_email']."',\n" .
+                "login_pas = '".$_POST['login_pas']."',\n" .
+                "privilege = '".$_POST['privilege']."'\n".
+                "WHERE\n" .
+                "user_id =" . $_SESSION["user_id"]."";
 
                 $db->query($sql);
 //                echo 'swal("新增成功！", "回到客戶總覽 或是 客戶新增?", "success").then(function (result) {
@@ -117,7 +97,6 @@ include_once '../../php/DataBase.php';
                         value: "更新客戶",
                     },
                 },
-
             }).then(function (value) {
                 switch (value) {
                     case"客戶總覽":
@@ -127,7 +106,6 @@ include_once '../../php/DataBase.php';
                         window.location.href = "change.php";
                         break;
                         
-
                 }
             })
         </script>  ';
@@ -135,7 +113,7 @@ include_once '../../php/DataBase.php';
 
 //                header("Location:all.php");
             } else {
-                $mes = $idErr . $birErr . $phoneErr . $DateErr;
+                $mes = $user_nameErr . $signup_datetimeErr . $signup_emailErr . $login_pasErr .$privilegeErr ;
                 echo '<script>  swal({
                 text: "' . $mes . '",
                 icon: "error",
@@ -188,9 +166,9 @@ include_once '../../php/DataBase.php';
                 <li><a href="../userIndex.php" style="color:#000; ">主頁</a></li>            
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">客戶</a>          
+                    <a href="#" style="color:#000; ">帳戶管理</a>          
                     <ul style="z-index: 2; ">          
-                        <li><a href="../customer/all.php">客戶總覽</a></li>
+                        <li><a href="../customer/all.php">帳戶總覽</a></li>
                         <li><a href="../customer/add.php">新增</a></li>                 
                         <li><a href="../customer/delete.php">刪除</a></li>
                         <li><a href="../customer/change.php">更新</a></li>                       
@@ -198,9 +176,9 @@ include_once '../../php/DataBase.php';
                 </li>              
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">員工</a>          
+                    <a href="#" style="color:#000; ">Hashtags</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../employee/all.php">員工總覽</a></li>
+                        <li><a href="../employee/all.php">Hashtags總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
                         <li><a href="../employee/change.php">更新</a></li>                   
@@ -208,16 +186,13 @@ include_once '../../php/DataBase.php';
                 </li>     
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">訂單</a>          
+                    <a href="#" style="color:#000; ">貼文管理</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../order/all.php">訂單總覽</a></li>
+                        <li><a href="../order/all.php">貼文總覽</a></li>
                         <li><a href="../order/delete.php">刪除</a></li>
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
                 </li>   
-
-                          
-
             </ul>
         </div>
 
@@ -232,59 +207,49 @@ include_once '../../php/DataBase.php';
                 <h2>更新客戶</h2>
                 <hr/>
                 
-                <p>客戶編號:<?php echo $_SESSION["idNum"]; ?></p>
+                <p>客戶編號:<?php echo $_SESSION["user_id"]; ?></p>
                 <br>
                 <br>
                 
                 <form method="post" action="">
 
-                    <div class="6u 12u$(small)"> <p>姓名：</p>
-                        <input type="text" name="name" id="name" value="<?php echo $_SESSION["name"]; ?>" placeholder="Name" required>
-                    </div>
-
-                    <br/>
-                    <div class="6u 12u$(small)"> <p>身分證字號：</p>
-                        <input type="text" name="id" id="id" value="<?php echo $_SESSION["cus_id"]; ?>" placeholder="ID" required>
+                <div class="6u 12u$(small)"> <p>姓名：</p>
+                        <input type="text" name="user_name" id="user_name" value="<?php echo $user_name; ?>" placeholder="Name" required>
                     </div>
 
                     <br/>
                     <div class="6u$ 12u$(small)"> 
-                        <p>生日：</p>
-                        <input type="date" name="bir" id="bir" value="<?php echo $_SESSION["bir"]; ?>" placeholder="yyyy-mm-dd" required>
+                        <p>新增日期：</p>
+                        <input type="date" name="signup_datetime" id="signup_datetime" value="<?php echo $signup_datetime; ?>" placeholder="yyyy-mm-dd" required>
                     </div>
+                
                     <br/>
-                    <p>性別：</p>
-
-                    <div class="4u 12u$(small)">
-                        <input type="radio" id="priority-low" name="gender"  value="男" checked>
-                        <label for="priority-low">男</label>
-                    </div>
-                    <div class="4u$ 12u$(small)">
-                        <input type="radio" id="priority-normal" name="gender" value="女" >
-                        <label for="priority-normal">女</label>
-                    </div>
-
-                    <br/>
-                    <div class="6u 12u$(xsmall)" ><p>手機：</p>
-                        <input type="text" name="phone" id="phone" value="<?php echo $_SESSION["phone"]; ?>" placeholder="Phone" required>
-                    </div>
-                    <br/>
+                    
                     <div class="6u$ 12u$(xsmall)" ><p>E-mail：</p>
-                        <input type="email" name="email" id="email" value="<?php echo $_SESSION["email"]; ?>" placeholder="email" required>
+                        <input type="email" name="signup_email" id="signup_email" value="<?php echo $signup_email; ?>" placeholder="email" required>
+                    </div>
+
+                    <div class="6u 12u$(xsmall)" ><p>密碼</p>
+                        <input type="text" name="login_pas" id="login_pas" value="<?php echo $login_pas; ?>" placeholder="login_pas" required>
+                    </div>
+
+                    <br/>
+                    
+                    <div class="6u 12u$(small)"> <p>權限</p>
+                        <input type="text" name="privilege" id="privilege" value="<?php echo $privilege; ?>" placeholder="privilege" required>
                     </div>	
 
 
                     <div class ="Err" style="color:red;">
                         <?php
-                        echo "<p>" . $nameErr . "</p>";
-                        echo "<p>" . $idErr . "</p>";
-                        echo "<p>" . $birErr . "</p>";
-                        echo "<p>" . $phoneErr . "</p>";
-                        echo "<p>" . $emailErr . "</p>";
-                        echo "<p>" . $DateErr . "</p>";
+                        echo "<p>" . $user_nameErr . "</p>";
+                        echo "<p>" . $signup_datetimeErr . "</p>";
+                        echo "<p>" . $signup_emailErr . "</p>";
+                        echo "<p>" . $login_pasErr . "</p>";
+                        echo "<p>" . $privilegeErr . "</p>";
                         ?>
                     </div>
-
+                    
                     <div class="12u$">
                         <ul class="actions">
                             <div align="right"  style="margin-right: 5%">
@@ -316,5 +281,6 @@ include_once '../../php/DataBase.php';
         </div>  
         <!--**************************-->    
     </body>
+
 
 </html>

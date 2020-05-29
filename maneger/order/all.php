@@ -61,9 +61,9 @@ include '../../php/FindOrder.php';
                 <li><a href="../userIndex.php" style="color:#000; ">主頁</a></li>            
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">客戶</a>          
+                    <a href="#" style="color:#000; ">帳戶管理</a>          
                     <ul style="z-index: 2; ">          
-                        <li><a href="../customer/all.php">客戶總覽</a></li>
+                        <li><a href="../customer/all.php">帳戶總覽</a></li>
                         <li><a href="../customer/add.php">新增</a></li>                 
                         <li><a href="../customer/delete.php">刪除</a></li>
                         <li><a href="../customer/change.php">更新</a></li>                       
@@ -71,9 +71,9 @@ include '../../php/FindOrder.php';
                 </li>              
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">員工</a>          
+                    <a href="#" style="color:#000; ">Hashtags</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../employee/all.php">員工總覽</a></li>
+                        <li><a href="../employee/all.php">Hashtags總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
                         <li><a href="../employee/change.php">更新</a></li>                   
@@ -81,18 +81,16 @@ include '../../php/FindOrder.php';
                 </li>     
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">訂單</a>          
+                    <a href="#" style="color:#000; ">貼文管理</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../order/all.php">訂單總覽</a></li>
+                        <li><a href="../order/all.php">貼文總覽</a></li>
                         <li><a href="../order/delete.php">刪除</a></li>
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
-                </li>  
-
-                         
-
+                </li>   
             </ul>
         </div>
+
 
 
 
@@ -102,11 +100,11 @@ include '../../php/FindOrder.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>訂單總覽</h2>
+                <h2>貼文總覽</h2>
                 <hr/>
                 <?php
                 $db = DB();
-                $sql = "SELECT * FROM \"顧客訂房\" ORDER BY \"訂單編號\"";
+                $sql = "SELECT * FROM post ORDER BY post_no";
                 $result = $db->query($sql);
 //        echo '<table  border="1">';
 //        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
@@ -117,7 +115,7 @@ include '../../php/FindOrder.php';
 //        }
 //        echo '</table>';
                 ?>
-                <P> 搜尋訂單：</p><input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
+                <P> 搜尋貼文：</p><input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
 
 
                 <table id="table-3" class="order-table"   >
@@ -125,13 +123,13 @@ include '../../php/FindOrder.php';
                         <!--必填-->
 
                         <tr>
-                            <th>訂單編號</th>
-                            <th >顧客編號</th>
-                            <th >房型編號</th>
-                            <th>訂房日期</th>
-                            <th>訂購間數</th>
+                            <th>總貼文編號</th>
+                            <th >貼文編號</th>
+                            <th >貼文內文</th>
+                            <th>發布者</th>
+                            <th>發布時間</th>
                             
-                            <th>加床</th>
+                            <th>更新時間</th>
                             <th>更新</th>
                             <th>刪除</th>
                         </tr>
@@ -143,15 +141,15 @@ include '../../php/FindOrder.php';
                             //PDO::FETCH_OBJ 指定取出資料的型態
                             echo '<tr>';
                             
-                            echo '<td>' . $row->訂單編號 . "</td>"
-                            . "<td>" . $row->顧客編號 . "</td>"
-                            . "<td>" . $row->房型編號 . "</td>"
-                            . "<td>" . $row->訂房日期 . "</td>"
-                            . "<td>" . $row->訂購間數 . "</td>"
+                            echo '<td>' . $row->post_no . "</td>"
+                            . "<td>" . $row->insta_post_id . "</td>"
+                            . "<td>" . $row->content . "</td>"
+                            . "<td>" . $row->announcer_id . "</td>"
+                            . "<td>" . $row->announce_time . "</td>"
                             
-                            . "<td>" . $row->加床 . "</td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=" . $row->訂單編號 . "\"'>更新</button></td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=" . $row->訂單編號 . "\"'>刪除</button></td>";
+                            . "<td>" . $row->update_time . "</td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=" . $row->post_no . "\"'>更新</button></td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=" . $row->post_no . "\"'>刪除</button></td>";
 
                             echo '</tr>';
                         }
