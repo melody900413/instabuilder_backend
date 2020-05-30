@@ -8,7 +8,7 @@ include '../../php/FindOrder.php';
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>更新訂單</title>
+        <title>更新貼文</title>
         <!-- 連結思源中文及css -->
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="../../images/user.jpg" rel="icon">
@@ -25,16 +25,14 @@ include '../../php/FindOrder.php';
     	<?php
         if (isset($_POST["Reg"])) {
             $db = DB();
-            $sql = "SELECT * FROM \"顧客訂房\" where \"訂單編號\" =" . $_POST["id"];
+            $sql = "SELECT * FROM post where post_no =" . $_POST["post_no"];
             $result = $db->query($sql);
             while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-                if (isset($row->訂單編號)) {
-                    $_SESSION["idNum"] = $row->訂單編號;
-                    $_SESSION["cusid"] = $row->顧客編號;
-                    $_SESSION["roomid"] = $row->房型編號;
-                    $_SESSION["resDate"] = $row->訂房日期;
-                    $_SESSION["num"] = $row->訂購間數;
-                    $_SESSION["bed"] = $row->加床;
+                if (isset($row->post_no)) {
+                    $_SESSION["post_no"] = $row->post_no;
+                    $_SESSION["content"] = $row->content;
+                    $_SESSION["announcer_id"] = $row->announcer_id;
+                 
 
                     header("Location:change2.php");
                 }
@@ -99,7 +97,7 @@ include '../../php/FindOrder.php';
                         <li><a href="../employee/all.php">Hashtags總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
-                        <li><a href="../employee/change.php">更新</a></li>                   
+                                   
                     </ul>
                 </li>     
 
@@ -110,7 +108,15 @@ include '../../php/FindOrder.php';
                         <li><a href="../order/delete.php">刪除</a></li>
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
-                </li>   
+                </li>
+                <li class="sub">         
+                    <a href="#" style="color:#000; ">貼文觸及</a>          
+                    <ul style="z-index: 2">          
+                    <li><a href="../reach/like.php">按讚數統計查詢</a></li>
+                        <li><a href="../reach/comment.php">留言記錄查詢</a></li>
+                        <li><a href="../reach/saved.php">珍藏數統計查詢</a></li>
+                    </ul>
+                </li>     
             </ul>
         </div>
 
@@ -120,13 +126,13 @@ include '../../php/FindOrder.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>更新訂單</h2>
+                <h2>更新貼文</h2>
                 <hr/>
 
                 <form method="post" action="">
 
-                    <div class="6u 12u$(small)"> <p>訂單編號：</p>
-                        <input type="number" name="id" id="big" value="" placeholder="Number" required>
+                    <div class="6u 12u$(small)"> <p>貼文編號：</p>
+                        <input type="number" name="post_no" id="big" value="" placeholder="Number" required>
                         <script>
                             var url = location.href;
                             //之後去分割字串把分割後的字串放進陣列中

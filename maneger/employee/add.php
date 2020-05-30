@@ -24,46 +24,32 @@ LogInSure();
 
     <body>
     	<?php
-        $nameErr = $empidErr = $titleErr = $accErr = $passwordErr = "";
-        $name = $empid = $title = $acc = $password = "";
+        $hashtagErr = $stageErr = "";
+        $hashtag = $stage  = "";
         $sure = true;
 
         if (isset($_POST["Reg"])) {
             
-            $empid = $_POST["empid"];
-			$name = $_POST["name"];
-            $title = $_POST["title"];
-            $acc = $_POST["acc"];
-            $password = $_POST["password"];
+            $hashtag = $_POST["hashtag"];
+			$stage = $_POST["stage"];
+          
+            if (empty($_POST["hashtag"])) {
 
-            if (empty($_POST["name"])) {
-
-                $nameErr = "姓名是必填的!";
+                $hashtagErr = "hashtag是必填的!";
                 $sure = false;
             }
 
-            if (empty($_POST["empid"])) {
-                $empidErr = "員工編號是必填的!";
+            if (($_POST["stage"])>3) {
+                $stageErr = "stage是必填的!";
                 $sure = false;
             }
 
-            if (empty($_POST["acc"])) {
-
-                $accErr = "帳號是必填的!";
-                $sure = false;
-            }
-
-            if (empty($_POST["password"])) {
-
-                $passwordErr = "密碼是必填的!";
-                $sure = false;
-            }
+            
             if ($sure) {
 
                 $db = DB();
-                $sql = "INSERT INTO \"員工\" ( \"員工編號\", \"員工姓名\", \"職稱\", \"帳號\","
-                        . " \"密碼\" )VALUES( '" . $_POST["empid"] . "', '" . $_POST["name"] . "', '" . $_POST["title"] . "', "
-                        . "'" . $_POST["acc"] . "', '" . $_POST["password"] . "' );";
+                $sql = "INSERT INTO hashtagcates (hashtag, stage)
+                VALUES ('".$_POST['hashtag']."','".$_POST['stage']."')";
 
                 $db->query($sql);
 //                echo 'swal("新增成功！", "回到員工總覽 或是 員工新增?", "success").then(function (result) {
@@ -104,7 +90,7 @@ LogInSure();
 
 //                header("Location:all.php");
             } else {
-                $mes = $empidErr . $nameErr . $accErr . $passwordErr;
+                $mes = $hashtagErr . $stageErr ;
                 echo '<script>  swal({
                 text: "' . $mes . '",
                 icon: "error",
@@ -172,7 +158,7 @@ LogInSure();
                         <li><a href="../employee/all.php">Hashtags總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
-                        <li><a href="../employee/change.php">更新</a></li>                   
+                                    
                     </ul>
                 </li>     
 
@@ -184,6 +170,14 @@ LogInSure();
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
                 </li>   
+                <li class="sub">         
+                    <a href="#" style="color:#000; ">貼文觸及</a>          
+                    <ul style="z-index: 2">          
+                    <li><a href="../reach/like.php">按讚數統計查詢</a></li>
+                        <li><a href="../reach/comment.php">留言記錄查詢</a></li>
+                        <li><a href="../reach/saved.php">珍藏數統計查詢</a></li>
+                    </ul>
+                </li>  
             </ul>
         </div>
 
@@ -194,35 +188,19 @@ LogInSure();
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>新增員工</h2>
+                <h2>新增Hasgtag</h2>
                 <hr/>
 
                 <form method="post" action="">
 
-                    <div class="6u 12u$(small)"> <p>員工編號：</p>
-                        <input type="text" name="empid" id="empid" value="<?php echo $empid; ?>" placeholder="Ex:E123" required>
+                    <div class="6u 12u$(small)"> <p>Hashtag：</p>
+                        <input type="text" name="hashtag" id="hashtag" value="<?php echo $hashtag; ?>" placeholder="好吃" required>
                     </div>
 
                     <br/>
-                    <div class="6u 12u$(small)"> <p>姓名：</p>
-                        <input type="text" name="name" id="name" value="<?php echo $name; ?>" placeholder="Name" required>
+                    <div class="6u 12u$(small)"> <p>層數：</p>
+                        <input type="text" name="stage" id="stage" value="<?php echo $stage; ?>" placeholder="Name" required>
                     </div>
-
-                    <br/>
-                    <div class="6u$ 12u$(small)"> 
-                        <p>職稱：</p>
-                        <input type="text" name="title" id="title" value="<?php echo $title; ?>" placeholder="Name" required>
-                    </div>
-                    <br/>
-                    <div class="6u 12u$(small)"> <p>帳號：</p>
-                        <input type="text" name="acc" id="acc" value="<?php echo $acc; ?>" placeholder="Name" required>
-                    </div>
-
-                    <br/>
-                    <div class="6u 12u$(small)"> <p>密碼：</p>
-                        <input type="text" name="password" id="password" value="<?php echo $password; ?>" placeholder="Name" required>
-                    </div>
-
 
 
                     <div class="12u$">

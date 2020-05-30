@@ -75,7 +75,7 @@ if ($_SESSION["signup_email"] == "") {
                         <li><a href="employee/all.php">Hashtags總覽</a></li>
                         <li><a href="employee/add.php">新增</a></li>
                         <li><a href="employee/delete.php">刪除</a></li>
-                        <li><a href="employee/change.php">更新</a></li>                      
+                                           
                     </ul>
                 </li>     
 
@@ -88,6 +88,14 @@ if ($_SESSION["signup_email"] == "") {
                     </ul>
                 </li>   
 
+                <li class="sub">         
+                    <a href="#" style="color:#000; ">貼文觸及</a>          
+                    <ul style="z-index: 2">          
+                        <li><a href="reach/like.php">按讚數統計查詢</a></li>
+                        <li><a href="reach/comment.php">留言記錄查詢</a></li>
+                        <li><a href="reach/saved.php">珍藏數統計查詢</a></li>
+                        </ul>
+                </li>   
             </ul>
         </div>
 

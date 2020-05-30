@@ -181,7 +181,7 @@ include_once '../../php/DataBase.php';
                         <li><a href="../employee/all.php">Hashtags總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
-                        <li><a href="../employee/change.php">更新</a></li>                   
+                                      
                     </ul>
                 </li>     
 
@@ -193,6 +193,13 @@ include_once '../../php/DataBase.php';
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
                 </li>   
+                <li class="sub">         
+                    <a href="#" style="color:#000; ">貼文觸及</a>          
+                    <ul style="z-index: 2">          
+                    <li><a href="../reach/like.php">按讚數統計查詢</a></li>
+                        <li><a href="../reach/comment.php">留言記錄查詢</a></li>
+                        <li><a href="../reach/saved.php">珍藏數統計查詢</a></li>
+                </li>  
             </ul>
         </div>
 
@@ -204,10 +211,10 @@ include_once '../../php/DataBase.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>更新客戶</h2>
+                <h2>更新帳戶</h2>
                 <hr/>
                 
-                <p>客戶編號:<?php echo $_SESSION["user_id"]; ?></p>
+                <p>客戶帳戶:<?php echo $_SESSION["user_id"]; ?></p>
                 <br>
                 <br>
                 

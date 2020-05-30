@@ -38,13 +38,13 @@ LogInSure();
 
         $sure = true;
         if (isset($_POST["Reg"])) {
-            if (empty($_POST["id"])) {
+            if (empty($_POST["hashtag_no"])) {
 
                 $nameErr = "編號是必填的!";
                 $sure = false;
             }
             if ($sure) {
-                $_SESSION["dele_id"] = $_POST["id"];
+                $_SESSION["dele_hashtag_no"] = $_POST["hashtag_no"];
                 echo '        <script>
                 swal({
                     title: "確定刪除？",
@@ -128,7 +128,7 @@ LogInSure();
                         <li><a href="../employee/all.php">Hashtags總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
-                        <li><a href="../employee/change.php">更新</a></li>                   
+                                       
                     </ul>
                 </li>     
 
@@ -140,6 +140,14 @@ LogInSure();
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
                 </li>   
+                <li class="sub">         
+                    <a href="#" style="color:#000; ">貼文觸及</a>          
+                    <ul style="z-index: 2">          
+                    <li><a href="../reach/like.php">按讚數統計查詢</a></li>
+                        <li><a href="../reach/comment.php">留言記錄查詢</a></li>
+                        <li><a href="../reach/saved.php">珍藏數統計查詢</a></li>
+                    </ul>
+                </li>  
             </ul>
         </div>
 
@@ -150,14 +158,14 @@ LogInSure();
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>刪除員工</h2>
+                <h2>刪除hashtag</h2>
 
                 <hr/>
 
                 <form method="post" action="">
 
-                    <div class="6u 12u$(small)"> <p>員工編號：</p>
-                        <input type="text" name="id" id="big" value="" placeholder="Number" required>
+                    <div class="6u 12u$(small)"> <p>hashtag編號：</p>
+                        <input type="text" name="hashtag_no" id="big" value="" placeholder="Number" required>
                         <script>
                             var url = location.href;
                             //之後去分割字串把分割後的字串放進陣列中

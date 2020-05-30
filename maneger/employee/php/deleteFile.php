@@ -4,9 +4,9 @@
     $db = DB();
     $sql ="DELETE \n".
     "FROM\n".
-    "	\"員工\"\n".
+    "	hashtagcates\n".
     "WHERE\n".
-    "	員工編號 ='". $_SESSION["dele_id"]."'";
+    "	hashtag_no='". $_SESSION["dele_hashtag_no"]."'";
 
     $db->query($sql);
     $_SESSION["dele_sure"] = true;

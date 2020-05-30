@@ -9,7 +9,7 @@ include_once '../../php/DataBase.php';
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>更新訂單</title>
+        <title>更新貼文</title>
         <!-- 連結思源中文及css -->
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="../../images/user.jpg" rel="icon">
@@ -26,61 +26,33 @@ include_once '../../php/DataBase.php';
 
     <body>
         <?php
-        $idNumErr = $cusidErr = $roomidErr = $resDateErr = $numErr = $bedErr = "";
-        $idNum = $cusid = $roomid = $num = $resDate = $bed = "";
+        $contentErr = $announcer_idErr = "";
+        $content = $announcer_id = "";
         $sure = true;
         if (isset($_POST["Reg"])) {
-            $cusid = $_POST["cusid"];
-            $roomid = $_POST["roomid"];
-            $resDate = $_POST["resDate"];
-            $num = $_POST["num"];
-            $bed = $_POST["bed"];
-            if (empty($_POST["cusid"])) {
-                $nameErr = "顧客編號是必填的!";
+            $content = $_POST["content"];
+            $announcer_id = $_POST["announcer_id"];
+           
+            if (empty($_POST["content"])) {
+                $contentErr = "內容是必填的!";
                 $sure = false;
             }
-            if (empty($_POST["roomid"])) {
-                $roomidErr = "房型編號是必填的!";
+            if (empty($_POST["announcer_id"])) {
+                $announcer_idErr = "announcer是必填的!";
                 $sure = false;
             
             }
-            if (empty($_POST["resDate"])) {
-                $resDateErr = "訂房日期是必填的!";
-                $sure = false;
-            } else {
-//            $date = (strtotime($bir) - strtotime(date('Y-m-d'))) / (365*3+366);
-                $age = round((time() - strtotime($resDate)));
-                if ($age > 0) {
-                    $resDateErr = "訂房日期不能是過去!";
-                    $sure = false;
-                }
-            }
-            if (empty($_POST["num"])) {
-                $numErr = "訂購間數是必填的!";
-                $sure = false;
             
-            }
-            if (empty($_POST["bed"])) {
-                $bedErr = "加床是必填的!";
-                $sure = false;
-            }else{
-                if($_POST["bed"]>2 || $_POST["bed"] <0){
-                    $bedErr = "加床不可超過限制!";
-                $sure = false;
-                }
-                
-            }
+            
             if ($sure) {
                 $db = DB();
-                $sql = "UPDATE \"顧客訂房\" \n" .
-                        "SET \"訂單編號\" = ".$_SESSION["idNum"].",\n" .
-                        "\"顧客編號\" = ".$_POST["cusid"].",\n" .
-                        "\"房型編號\" = '".$_POST["roomid"]."',\n" .
-                        "\"訂房日期\" = '".$_POST["resDate"]."',\n" .
-                        "\"訂購間數\" = ".$_POST["num"].",\n" .
-                        "\"加床\" = ".$_POST["bed"]."\n" .
-                        "WHERE\n" .
-                        "	\"訂單編號\" =" . $_SESSION["idNum"];
+                $sql = "UPDATE post \n" 
+                ."SET post_no = ". $_SESSION['post_no'] .",\n" 
+                ."content = '".$_POST['content']."',\n" 
+                ."announcer_id = '".$_POST['announcer_id']."'\n".
+                "WHERE\n" 
+                ."post_no =" . $_SESSION["post_no"]."";
+
                 $db->query($sql);
 //                echo 'swal("新增成功！", "回到訂單總覽 或是 訂單新增?", "success").then(function (result) {
 //                    
@@ -115,7 +87,7 @@ include_once '../../php/DataBase.php';
         </script>  ';
 //                header("Location:all.php");
             } else {
-                $mes = $nameErr . $roomidErr . $resDateErr .$numErr . $bedErr;
+                $mes = $$contentErr . $announcer_idErr ;
                 echo '<script>  swal({
                 text: "' . $mes . '",
                 icon: "error",
@@ -182,7 +154,7 @@ include_once '../../php/DataBase.php';
                         <li><a href="../employee/all.php">Hashtags總覽</a></li>
                         <li><a href="../employee/add.php">新增</a></li>
                         <li><a href="../employee/delete.php">刪除</a></li>
-                        <li><a href="../employee/change.php">更新</a></li>                   
+                                      
                     </ul>
                 </li>     
 
@@ -194,6 +166,14 @@ include_once '../../php/DataBase.php';
                         <li><a href="../order/change.php">更新</a></li>                   
                     </ul>
                 </li>   
+                <li class="sub">         
+                    <a href="#" style="color:#000; ">貼文觸及</a>          
+                    <ul style="z-index: 2">          
+                    <li><a href="../reach/like.php">按讚數統計查詢</a></li>
+                        <li><a href="../reach/comment.php">留言記錄查詢</a></li>
+                        <li><a href="../reach/saved.php">珍藏數統計查詢</a></li>
+                    </ul>
+                </li>  
             </ul>
         </div>
 
@@ -206,56 +186,31 @@ include_once '../../php/DataBase.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>更新訂單</h2>
+            <h2>更新貼文內容</h2>
                 <hr/>
                 
-                <p>訂單編號:<?php echo $_SESSION["idNum"]; ?></p>
+                <p>貼文編號:<?php echo $_SESSION["post_no"]; ?></p>
                 <br>
                 <br>
                 
                 <form method="post" action="">
 
-                    <div class="6u 12u$(small)"> <p>顧客編號：</p>
-                        <input type="number" name="cusid" id="cusid" value="<?php echo $_SESSION["cusid"]; ?>" placeholder="Name" required>
-                    </div>
-
-                    <br/>
-                    <div class="6u 12u$(small)"> <p>房型編號：</p>
-                        <input type="text" name="roomid" id="roomid" value="<?php echo $_SESSION["roomid"]; ?>" placeholder="R001-R010" required>
+                <div class="6u 12u$(small)"> <p>內容:</p>
+                        <input type="text" name="content" id="content" value="<?php echo $content; ?>" placeholder="content"" required>
                     </div>
 
                     <br/>
                     <div class="6u$ 12u$(small)"> 
-                        <p>訂房日期：</p>
-                        <input type="date" name="resDate" id="resDate" value="<?php echo $_SESSION["resDate"]; ?>" placeholder="yyyy-mm-dd" required>
+                        <p>announcer_id:</p>
+                        <input type="text" name="announcer_id" id="announcer_id" value="<?php echo $announcer_id; ?>" placeholder="3" required>
                     </div>
-                    <br/>
-                    <p>間數：</p>
-
-					<div class="12u$">
-                        <div class="select-wrapper">
-                            <input type="number" name="num" id="num" value="<?php echo $_SESSION["num"]; ?>" placeholder="1-4" required>
-                        </div>
-                    </div>
-
-                    <br/>
-                    <p>加床(張數)：</p>
-                    <div class="12u$">
-                        <div class="select-wrapper">
-                            <input type="number" name="bed" id="bed" value="<?php echo $_SESSION["bed"]; ?>" placeholder="0-2" required>
-                        </div>
-                    </div>
-                    </div>
-                    	
-
-
+                
+                    
+                    
                     <div class ="Err" style="color:red;">
                         <?php
-                        echo "<p>" . $cusidErr . "</p>";
-                        echo "<p>" . $roomidErr . "</p>";
-                        echo "<p>" . $resDateErr . "</p>";
-                        echo "<p>" . $numErr . "</p>";
-                        echo "<p>" . $bedErr . "</p>";
+                        echo "<p>" . $contentErr . "</p>";
+                        echo "<p>" . $announcer_idErr . "</p>";
                         ?>
                     </div>
 
