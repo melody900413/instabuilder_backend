@@ -10,7 +10,7 @@ include '../../php/FindOrder.php';
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>新增員工</title>
+        <title>新增客戶</title>
         <!-- 連結思源中文及css -->
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="../../images/user.jpg" rel="icon">
@@ -20,37 +20,39 @@ include '../../php/FindOrder.php';
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!------------------------->
-
-
+        
+        
     </head>
 
     <body>
 
         <!-- Header -->
         <header id="header" class="alt">
-            <div class="logo"><a href="../../index/index.html">渡假村 <span>RESORT</span></a></div>
-            <a href="#menu">Menu</a>
+            <div class="logo"><a href="../index/index.html">Instabuilder <span>Backend</span></a></div>
+            <a href="#menu">Menu</a> 
         </header>
 
         <!-- Nav -->
+        
         <nav id="menu">
             <ul class="links">
+                <!--
                 <li><a href="../../news/news.html">最新消息</a></li>
                 <li><a href="../../room/room.php">訂房服務</a></li>
-                <li><a href="../../room/roomSpace.php">查詢空房</a></li>
+                <li><a href="../room/roomSpace.php">查詢空房</a></li>
                 <li><a href="../../search/search.php">查詢訂房</a></li>
                 <li><a href="../../about/about.html">關於我們</a></li>
                 <li><a href="../../information/information.php">聯絡資訊</a></li>
-
+                -->
                 <li style="margin-top: 200%"><a href="../maneger/maneger.php">管理者介面</a></li>
-                <li style="margin-top: 0%"><a href="../php/logOut.php">登出</a></li>
+                <li style="margin-top: 0%"><a href="../maneger/php/logOut.php">登出</a></li>    
             </ul>
         </nav>
-
+        
         <section id="One" class="wrapper style3">
             <div class="inner" style="z-index: 1">
                 <header class="align-center">
-                    <h2>Maneger Page</h2>
+                    <h2>後端管理</h2>
                 </header>
             </div>
         </section>
@@ -63,41 +65,44 @@ include '../../php/FindOrder.php';
                 <li class="sub">         
                     <a href="#" style="color:#000; ">帳戶管理</a>          
                     <ul style="z-index: 2; ">          
-                        <li><a href="../customer/all.php">帳戶總覽</a></li>
-                        <li><a href="../customer/add.php">新增</a></li>                 
-                        <li><a href="../customer/delete.php">刪除</a></li>
-                        <li><a href="../customer/change.php">更新</a></li>                       
+                        <li><a href="all.php">帳戶總覽</a></li>                 
+                        <li><a href="add.php">新增</a></li>                 
+                        <li><a href="delete.php">刪除</a></li>
+                        <li><a href="change.php">更新</a></li>                     
                     </ul>
                 </li>              
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">Hashtags</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../employee/all.php">Hashtags總覽</a></li>
-                        <li><a href="../employee/add.php">新增</a></li>
-                        <li><a href="../employee/delete.php">刪除</a></li>
-                                     
+                        <li><a href="hashtag/all.php">Hashtags總覽</a></li>
+                        <li><a href="hashtag/add.php">新增</a></li>
+                        <li><a href="hashtag/delete.php">刪除</a></li>
+                                           
                     </ul>
                 </li>     
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">貼文管理</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../order/all.php">貼文總覽</a></li>
-                        <li><a href="../order/delete.php">刪除</a></li>
-                        <li><a href="../order/change.php">更新</a></li>                   
+                        <li><a href="post/all.php">貼文總覽</a></li>
+                        <li><a href="post/delete.php">刪除</a></li>
+                        <li><a href="post/change.php">更新</a></li>                   
                     </ul>
-                </li>  
+                </li>   
+
                 <li class="sub">         
                     <a href="#" style="color:#000; ">貼文觸及</a>          
                     <ul style="z-index: 2">          
-                    <li><a href="../reach/like.php">按讚數統計查詢</a></li>
-                        <li><a href="../reach/comment.php">留言記錄查詢</a></li>
-                        <li><a href="../reach/saved.php">珍藏數統計查詢</a></li>
-                    </ul>
+                        <li><a href="reach/like.php">按讚數統計查詢</a></li>
+                        <li><a href="reach/comment.php">留言記錄查詢</a></li>
+                        <li><a href="reach/saved.php">珍藏數統計查詢</a></li>
+                        </ul>
                 </li>   
             </ul>
         </div>
+        <!--**************************-->
+
 
 
 
@@ -107,11 +112,11 @@ include '../../php/FindOrder.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>Hashtags總覽</h2>
+                <h2>帳戶總覽</h2>
                 <hr/>
                 <?php
                 $db = DB();
-                $sql = "SELECT * FROM hashtagcates ORDER BY hashtag_no";
+                $sql = "SELECT * from instabuilder.user ORDER BY user_id";
                 $result = $db->query($sql);
 //        echo '<table  border="1">';
 //        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
@@ -122,7 +127,7 @@ include '../../php/FindOrder.php';
 //        }
 //        echo '</table>';
                 ?>
-                <P> 搜尋Hashtags：</p><input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
+               <P> 搜尋帳戶：</p><input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
 
 
                 <table id="table-3" class="order-table"   >
@@ -130,11 +135,13 @@ include '../../php/FindOrder.php';
                         <!--必填-->
 
                         <tr>
-                            <th >hashtag編號</th>
-                            <th >hashtag</th>
-                            <th >階層</th>
-                            <th>上一層hashtag</th>
-                            <th >更新</th>
+                            <th width='100px'>使用者編號</th>
+                            <th >姓名</th>
+                            <th width='100px'>新增時間</th>
+                            <th>E-mail</th>
+                            <th>密碼</th>
+                            <th width='70px'>權限</th>
+                            <th>更新</th>
                             <th>刪除</th>
                         </tr>
                     </thead>
@@ -144,13 +151,15 @@ include '../../php/FindOrder.php';
                         while ($row = $result->fetch(PDO::FETCH_OBJ)) {
                             //PDO::FETCH_OBJ 指定取出資料的型態
                             echo '<tr>';
-                            echo '<td>' . $row->hashtag_no . "</td>"
-                            . "<td>" . $row->hashtag . "</td>"
-                            . "<td>" . $row->stage . "</td>"
-                            . "<td>" . $row->last_stage . "</td>"
+                            echo '<td>' . $row->user_id . "</td>"
+                            . "<td>" . $row->user_name . "</td>"
+                            . "<td>" . $row->signup_datetime . "</td>"
+                            . "<td>" . $row->signup_email . "</td>"
+                            . "<td>" . $row->login_pas . "</td>"
+                            . "<td>" . $row->privilege . "</td>"
                             
-                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=" . $row->hashtag_no . "\"'>更新</button></td>"
-                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=" . $row->hashtag_no . "\"'>刪除</button></td>";
+                            . "<td> <button type=\"button\" onclick='location.href=\"change.php?id=". $row->user_id."\"'>更新</button></td>"
+                            . "<td> <button type=\"button\" onclick='location.href=\"delete.php?id=". $row->user_id."\"'>刪除</button></td>";
 
                             echo '</tr>';
                         }
@@ -179,52 +188,52 @@ include '../../php/FindOrder.php';
             &copy; NTUB GROUP 10     
         </div>  
         <!--**************************-->    
-
+                        
         <script>
-            (function (document) {
-                'use strict';
+        (function(document) {
+  'use strict';
 
-                // 建立 LightTableFilter
-                var LightTableFilter = (function (Arr) {
+  // 建立 LightTableFilter
+  var LightTableFilter = (function(Arr) {
 
-                    var _input;
+    var _input;
 
-                    // 資料輸入事件處理函數
-                    function _onInputEvent(e) {
-                        _input = e.target;
-                        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                        Arr.forEach.call(tables, function (table) {
-                            Arr.forEach.call(table.tBodies, function (tbody) {
-                                Arr.forEach.call(tbody.rows, _filter);
-                            });
-                        });
-                    }
+    // 資料輸入事件處理函數
+    function _onInputEvent(e) {
+      _input = e.target;
+      var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+      Arr.forEach.call(tables, function(table) {
+        Arr.forEach.call(table.tBodies, function(tbody) {
+          Arr.forEach.call(tbody.rows, _filter);
+        });
+      });
+    }
 
-                    // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
-                    function _filter(row) {
-                        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                    }
+    // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+    function _filter(row) {
+      var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+      row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+    }
 
-                    return {
-                        // 初始化函數
-                        init: function () {
-                            var inputs = document.getElementsByClassName('light-table-filter');
-                            Arr.forEach.call(inputs, function (input) {
-                                input.oninput = _onInputEvent;
-                            });
-                        }
-                    };
-                })(Array.prototype);
+    return {
+      // 初始化函數
+      init: function() {
+        var inputs = document.getElementsByClassName('light-table-filter');
+        Arr.forEach.call(inputs, function(input) {
+          input.oninput = _onInputEvent;
+        });
+      }
+    };
+  })(Array.prototype);
 
-                // 網頁載入完成後，啟動 LightTableFilter
-                document.addEventListener('readystatechange', function () {
-                    if (document.readyState === 'complete') {
-                        LightTableFilter.init();
-                    }
-                });
+  // 網頁載入完成後，啟動 LightTableFilter
+  document.addEventListener('readystatechange', function() {
+    if (document.readyState === 'complete') {
+      LightTableFilter.init();
+    }
+  });
 
-            })(document);
+})(document);
         </script>
     </body>
 
