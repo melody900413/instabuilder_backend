@@ -9,7 +9,7 @@ include_once '../../php/DataBase.php';
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>更新員工</title>
+        <title>更新貼文</title>
         <!-- 連結思源中文及css -->
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="../../images/user.jpg" rel="icon">
@@ -26,91 +26,68 @@ include_once '../../php/DataBase.php';
 
     <body>
         <?php
-        $nameErr = $titleErr = $accErr = $passwordErr = "";
-        $name = $title = $acc = $password = "";
+        $contentErr = $announcer_idErr = "";
+        $content = $announcer_id = "";
         $sure = true;
-
         if (isset($_POST["Reg"])) {
-            $name = $_POST["name"];
-            $id = $_POST["title"];
-            $bir = $_POST["acc"];
-            $phone = $_POST["password"];
-
-            if (empty($_POST["name"])) {
-
-                $nameErr = "姓名是必填的!";
+            $content = $_POST["content"];
+            $announcer_id = $_POST["announcer_id"];
+           
+            if (empty($_POST["content"])) {
+                $contentErr = "內容是必填的!";
                 $sure = false;
             }
-			if (empty($_POST["title"])) {
-
-                $titleErr = "職稱是必填的!";
+            if (empty($_POST["announcer_id"])) {
+                $announcer_idErr = "announcer是必填的!";
                 $sure = false;
+            
             }
-			if (empty($_POST["acc"])) {
-
-                $accErr = "帳號是必填的!";
-                $sure = false;
-            }
-			if (empty($_POST["password"])) {
-
-                $passwordErr = "密碼是必填的!";
-                $sure = false;
-            }
-			
-
+            
             
             if ($sure) {
-
                 $db = DB();
-                $sql = "UPDATE \"員工\" \n" .
-                        "SET \"員工編號\" ='".$_SESSION["empnum"]."',\n" .
-                        "\"員工姓名\" = '".$_POST["name"]."',\n" .
-                        "\"職稱\" = '".$_POST["title"]."',\n" .
-                        "\"帳號\" = '".$_POST["acc"]."',\n" .
-                        "\"密碼\" = '".$_POST["password"]."' \n" .
-                        "WHERE\n" .
-                        "	\"員工編號\" ='" . $_SESSION["empnum"]."'";
+                $sql = "UPDATE post \n" 
+                ."SET post_no = ". $_SESSION['post_no'] .",\n" 
+                ."content = '".$_POST['content']."',\n" 
+                ."announcer_id = '".$_POST['announcer_id']."'\n".
+                "WHERE\n" 
+                ."post_no =" . $_SESSION["post_no"]."";
 
                 $db->query($sql);
-//                echo 'swal("新增成功！", "回到員工總覽 或是 員工新增?", "success").then(function (result) {
+//                echo 'swal("新增成功！", "回到訂單總覽 或是 訂單新增?", "success").then(function (result) {
 //                    
 //                    window.location.href = "http://tw.yahoo.com";
 //                }); ';
-
                 echo '        <script>
             swal({
                 title: "更改成功！",
-                text: "回到員工總覽 或是 更新員工?",
+                text: "回到訂單總覽 或是 更新訂單?",
                 icon: "success",
                 buttons: {
                     1: {
-                        text: "員工總覽",
-                        value: "員工總覽",
+                        text: "訂單總覽",
+                        value: "訂單總覽",
                     },
                     2: {
-                        text: "更新員工",
-                        value: "更新員工",
+                        text: "更新訂單",
+                        value: "更新訂單",
                     },
                 },
-
             }).then(function (value) {
                 switch (value) {
-                    case"員工總覽":
+                    case"訂單總覽":
                         window.location.href = "all.php";
                         break;
-                    case"更新員工":
+                    case"更新訂單":
                         window.location.href = "change.php";
                         break;
                         
-
                 }
             })
         </script>  ';
-
-
 //                header("Location:all.php");
             } else {
-                $mes = $titleErr . $nameErr . $accErr . $passwordErr;
+                $mes = $$contentErr . $announcer_idErr ;
                 echo '<script>  swal({
                 text: "' . $mes . '",
                 icon: "error",
@@ -119,7 +96,6 @@ include_once '../../php/DataBase.php';
             }); </script>';
             }
         }
-
         function test_input($data) {
             $data = trim($data);
             $data = stripslashes($data);
@@ -130,29 +106,31 @@ include_once '../../php/DataBase.php';
 
         <!-- Header -->
         <header id="header" class="alt">
-            <div class="logo"><a href="../../index/index.html">渡假村 <span>RESORT</span></a></div>
-            <a href="#menu">Menu</a>
+            <div class="logo"><a href="../index/index.html">Instabuilder <span>Backend</span></a></div>
+            <a href="#menu">Menu</a> 
         </header>
 
         <!-- Nav -->
+        
         <nav id="menu">
             <ul class="links">
+                <!--
                 <li><a href="../../news/news.html">最新消息</a></li>
                 <li><a href="../../room/room.php">訂房服務</a></li>
-                <li><a href="../../room/roomSpace.php">查詢空房</a></li>
+                <li><a href="../room/roomSpace.php">查詢空房</a></li>
                 <li><a href="../../search/search.php">查詢訂房</a></li>
                 <li><a href="../../about/about.html">關於我們</a></li>
                 <li><a href="../../information/information.php">聯絡資訊</a></li>
-
+                -->
                 <li style="margin-top: 200%"><a href="../maneger/maneger.php">管理者介面</a></li>
-                <li style="margin-top: 0%"><a href="../php/logOut.php">登出</a></li>
+                <li style="margin-top: 0%"><a href="../maneger/php/logOut.php">登出</a></li>    
             </ul>
         </nav>
-
+        
         <section id="One" class="wrapper style3">
             <div class="inner" style="z-index: 1">
                 <header class="align-center">
-                    <h2>Maneger Page</h2>
+                    <h2>後端管理</h2>
                 </header>
             </div>
         </section>
@@ -165,42 +143,43 @@ include_once '../../php/DataBase.php';
                 <li class="sub">         
                     <a href="#" style="color:#000; ">帳戶管理</a>          
                     <ul style="z-index: 2; ">          
-                        <li><a href="../customer/all.php">帳戶總覽</a></li>
-                        <li><a href="../customer/add.php">新增</a></li>                 
-                        <li><a href="../customer/delete.php">刪除</a></li>
-                        <li><a href="../customer/change.php">更新</a></li>                       
+                        <li><a href="../user/all.php">帳戶總覽</a></li>                 
+                        <li><a href="../user/add.php">新增</a></li>                 
+                        <li><a href="../user/delete.php">刪除</a></li>
+                        <li><a href="../user/change.php">更新</a></li>                     
                     </ul>
                 </li>              
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">Hashtags</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../employee/all.php">Hashtags總覽</a></li>
-                        <li><a href="../employee/add.php">新增</a></li>
-                        <li><a href="../employee/delete.php">刪除</a></li>
-                                      
+                        <li><a href="../hashtag/all.php">Hashtags總覽</a></li>
+                        <li><a href="../hashtag/add.php">新增</a></li>
+                        <li><a href="../hashtag/delete.php">刪除</a></li>
+                                           
                     </ul>
                 </li>     
 
                 <li class="sub">         
                     <a href="#" style="color:#000; ">貼文管理</a>          
                     <ul style="z-index: 2">          
-                        <li><a href="../order/all.php">貼文總覽</a></li>
-                        <li><a href="../order/delete.php">刪除</a></li>
-                        <li><a href="../order/change.php">更新</a></li>                   
+                        <li><a href="../post/all.php">貼文總覽</a></li>
+                        <li><a href="../post/delete.php">刪除</a></li>
+                        <li><a href="../post/change.php">更新</a></li>                   
                     </ul>
                 </li>   
+
                 <li class="sub">         
                     <a href="#" style="color:#000; ">貼文觸及</a>          
                     <ul style="z-index: 2">          
-                    <li><a href="../reach/like.php">按讚數統計查詢</a></li>
+                        <li><a href="../reach/like.php">按讚數統計查詢</a></li>
                         <li><a href="../reach/comment.php">留言記錄查詢</a></li>
                         <li><a href="../reach/saved.php">珍藏數統計查詢</a></li>
-                    </ul>
-                </li>  
+                        </ul>
+                </li>   
             </ul>
         </div>
-
+        <!--**************************-->
 
 
 
@@ -210,42 +189,31 @@ include_once '../../php/DataBase.php';
 
             <!--~~~~~~~~~~~~~~~~~--> 
             <div class="content">
-                <h2>更新員工</h2>
+            <h2>更新貼文內容</h2>
                 <hr/>
                 
-                <p>員工編號:<?php echo $_SESSION["empnum"]; ?></p>
+                <p>貼文編號:<?php echo $_SESSION["post_no"]; ?></p>
                 <br>
                 <br>
                 
                 <form method="post" action="">
 
-                    <div class="6u 12u$(small)"> <p>員工姓名：</p>
-                        <input type="text" name="name" id="name" value="<?php echo $_SESSION["name"]; ?>" placeholder="Name" required>
+                <div class="6u 12u$(small)"> <p>內容:</p>
+                        <input type="text" name="content" id="content" value="<?php echo $content; ?>" placeholder="content"" required>
                     </div>
 
                     <br/>
-                    <div class="6u 12u$(small)"> <p>職稱：</p>
-                        <input type="text" name="title" id="title" value="<?php echo $_SESSION["title"]; ?>" placeholder="Ex.協理" required>
+                    <div class="6u$ 12u$(small)"> 
+                        <p>announcer_id:</p>
+                        <input type="text" name="announcer_id" id="announcer_id" value="<?php echo $announcer_id; ?>" placeholder="3" required>
                     </div>
-
-                    <br/>
-                    <div class="6u 12u$(small)"> <p>帳號：</p>
-                        <input type="text" name="acc" id="acc" value="<?php echo $_SESSION["emp_acc"]; ?>" placeholder="Ex.協理" required>
-                    </div>                    
-
-                    <br/>
-                    <div class="6u 12u$(small)"> <p>密碼：</p>
-                        <input type="text" name="password" id="password" value="<?php echo $_SESSION["emp_pas"]; ?>" placeholder="Ex.協理" required>
-                    </div>
+                
                     
-
-
+                    
                     <div class ="Err" style="color:red;">
                         <?php
-                        echo "<p>" . $nameErr . "</p>";
-                        echo "<p>" . $titleErr . "</p>";
-                        echo "<p>" . $accErr . "</p>";
-                        echo "<p>" . $passwordErr . "</p>";
+                        echo "<p>" . $contentErr . "</p>";
+                        echo "<p>" . $announcer_idErr . "</p>";
                         ?>
                     </div>
 
