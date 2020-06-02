@@ -17,7 +17,7 @@ div.container{
     background:#fff;
 }
 div.nav{
-	background-image: linear-gradient(to right, #E283A0, #946ccc);
+	background-color: #000000;
 }
 
 
@@ -26,7 +26,7 @@ div.nav{
 /*---------------------------*/
 div.header{
     height:80px;
-    background:url('../../images/b3.png');
+    background:url('../../images/b1.png');
 }
 
 
@@ -158,8 +158,8 @@ div.form span.name{
 div.footer{
     height:50px;
     line-height:50px;
-    background-image: linear-gradient(to right, #E283A0, #946ccc);
-    color:#555;
+    background-color: #000000;
+    color:#EE80C2;
     font-size:13px;
     text-align:center;
     letter-spacing:1px;

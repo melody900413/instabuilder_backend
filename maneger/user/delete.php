@@ -114,10 +114,10 @@ include '../../php/FindOrder.php';
         <!--**************************-->
         <div class ="nav">
             <ul id="navigation" style="z-index: 2; background:#F1EEC2;">        
-                <li><a href="../userIndex.php" style="color:#000; ">主頁</a></li>            
+                <li><a href="../userIndex.php" style="color:#dfadff; ">主頁</a></li>            
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">帳戶管理</a>          
+                    <a href="#" style="color:#dfadff; ">帳戶管理</a>          
                     <ul style="z-index: 2; ">          
                         <li><a href="../user/all.php">帳戶總覽</a></li>                 
                         <li><a href="../user/add.php">新增</a></li>                 
@@ -127,7 +127,7 @@ include '../../php/FindOrder.php';
                 </li>              
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">Hashtags</a>          
+                    <a href="#" style="color:#dfadff; ">Hashtags</a>          
                     <ul style="z-index: 2">          
                         <li><a href="../hashtag/all.php">Hashtags總覽</a></li>
                         <li><a href="../hashtag/add.php">新增</a></li>
@@ -137,7 +137,7 @@ include '../../php/FindOrder.php';
                 </li>     
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">貼文管理</a>          
+                    <a href="#" style="color:#dfadff; ">貼文管理</a>          
                     <ul style="z-index: 2">          
                         <li><a href="../post/all.php">貼文總覽</a></li>
                         <li><a href="../post/delete.php">刪除</a></li>
@@ -146,7 +146,7 @@ include '../../php/FindOrder.php';
                 </li>   
 
                 <li class="sub">         
-                    <a href="#" style="color:#000; ">貼文觸及</a>          
+                    <a href="#" style="color:#dfadff; ">貼文觸及</a>          
                     <ul style="z-index: 2">          
                         <li><a href="../reach/like.php">按讚數統計查詢</a></li>
                         <li><a href="../reach/comment.php">留言記錄查詢</a></li>
@@ -239,7 +239,7 @@ include '../../php/FindOrder.php';
 
         <!--~~~~~~~~~~~~~~~~~--> 
         <div class="footer">
-            &copy; NTUB GROUP 10     
+            &copy; NTUB GROUP 109501     
         </div>  
         <!--**************************-->    
     </body>
